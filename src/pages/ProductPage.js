@@ -15,7 +15,7 @@ const ProductPage = ({ productsData }) => {
       <div>
         <label>
           Ara
-          <input type="text" onChange={inputChangeHandler} />
+          <input type="text" onChange={inputChangeHandler} data-cy="filter-input"/>
         </label>
       </div>
       <div className="products-container">

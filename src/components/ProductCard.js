@@ -18,7 +18,7 @@ const ProductCard = ({ product, dataCek }) => {
   });
 
   return (
-    <div className={styles.card} title={product.id}>
+    <div className={`product-card ${styles.card}`} title={product.id}>
       <img src={img} />
       <h3>{name}</h3>
       <p>{description}</p>
