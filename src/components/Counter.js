@@ -18,6 +18,7 @@ const Counter = () => {
 
   const sayacArttir = () => {
     setSayac(sayac + 1);
+    // sayac++;
     console.log("sayaç: ", sayac);
   };
 

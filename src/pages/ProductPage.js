@@ -2,11 +2,15 @@ import { useState } from "react";
 import Counter from "../components/Counter";
 import ProductCard from "../components/ProductCard";
 
+// state veya prop değişirse React Component render edilir - yenilenir
+
 const ProductPage = ({ productsData }) => {
   const [filterText, setFilterText] = useState("");
+  // let filterText = "";
 
   const inputChangeHandler = (e) => {
     setFilterText(e.target.value);
+    // filterText = e.target.value;
   };
 
   return (
@@ -15,7 +19,11 @@ const ProductPage = ({ productsData }) => {
       <div>
         <label>
           Ara
-          <input type="text" onChange={inputChangeHandler} data-cy="filter-input"/>
+          <input
+            type="text"
+            onChange={inputChangeHandler}
+            data-cy="filter-input"
+          />
         </label>
       </div>
       <div className="products-container">

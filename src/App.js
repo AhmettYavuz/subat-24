@@ -5,14 +5,14 @@ import Footer from "./layout/Footer";
 import Header from "./layout/Header";
 import ProductPage from "./pages/ProductPage";
 
-import "./App.css";
 import Slide from "./components/Slide";
-import { Switch } from "react-router-dom";
-import { Route } from "react-router-dom/cjs/react-router-dom.min";
+import { Switch, Route } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { CounterPage } from "./pages/CounterPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ContactPage } from "./pages/ContactPage";
+
+import "./App.css";
 
 function App() {
   const [productsData, setProductsData] = useState([]);
@@ -85,3 +85,6 @@ function App() {
 }
 
 export default App;
+
+export const PI = 3;
+export const userName = "Anonim";
