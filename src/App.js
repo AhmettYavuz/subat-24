@@ -6,7 +6,7 @@ import Header from "./layout/Header";
 import ProductPage from "./pages/ProductPage";
 
 import Slide from "./components/Slide";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { HomePage } from "./pages/HomePage";
 import { CounterPage } from "./pages/CounterPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
@@ -16,6 +16,8 @@ import "./App.css";
 
 function App() {
   const [productsData, setProductsData] = useState([]);
+  const [showSlide, setShowSlide] = useState(true);
+  const location = useLocation();
 
   const productEkle = () => {
     setProductsData([
@@ -50,7 +52,20 @@ function App() {
     // component did mount
     // tüm uygulama yüklendi
     fetchProducts();
+
+    return () => {
+      // component will unmount
+    };
   }, []);
+
+  useEffect(() => {
+    console.log("location: ", location);
+    if (location.pathname === "/products") {
+      setShowSlide(false);
+    } else {
+      setShowSlide(true);
+    }
+  }, [location]);
 
   return (
     <div className="app">
@@ -59,7 +74,7 @@ function App() {
         productEkle={productEkle}
         fetchProducts={fetchProducts}
       />
-      <Slide />
+      {showSlide && <Slide />}
       <div className="page-body">
         <Switch>
           <Route path="/" exact>

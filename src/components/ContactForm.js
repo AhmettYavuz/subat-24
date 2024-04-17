@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Button } from "reactstrap";
+import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 
 const formDataInitial = {
   name: "",
@@ -135,35 +135,36 @@ export const ContactForm = () => {
   }, [errors]);
 
   return (
-    <form onSubmit={submitHandler}>
+    <Form onSubmit={submitHandler}>
       <h1>Form Valid {!isValid && " Değil"}</h1>
-      <div>
-        <label>
-          İsim
-          <input
-            type="text"
-            name="name"
-            // controlled component!
-            value={formData.name}
-            onChange={changeHandler}
-          />
-        </label>
+      <FormGroup>
+        <Label for="isim-input">İsim</Label>
+        <Input
+          id="isim-input"
+          type="text"
+          name="name"
+          // controlled component!
+          value={formData.name}
+          onChange={changeHandler}
+          placeholder="Lütfen isimn giriniz..."
+        />
         {errors.name && <p className="error">{errors.name}</p>}
-      </div>
-      <div>
-        <label>
-          Eposta
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={changeHandler}
-          />
-        </label>
-      </div>
-      <div>
-        <label>Mesaj Tipini Seçiniz:</label>
-        <select
+      </FormGroup>
+      <FormGroup>
+        <Label for="eposta-input">E-posta</Label>
+        <Input
+          id="eposta-input"
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={changeHandler}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Label for="msg-type-input">Mesaj Tipini Seçiniz</Label>
+        <Input
+          id="msg-type-input"
+          type="select"
           value={formData.messageType}
           name="messageType"
           onChange={changeHandler}
@@ -176,7 +177,12 @@ export const ContactForm = () => {
               {mt.label}
             </option>
           ))}
-        </select>
+        </Input>
+      </FormGroup>
+
+      <div>
+        <label>:</label>
+        <select></select>
       </div>
       <div>
         <label>
@@ -230,6 +236,6 @@ export const ContactForm = () => {
       <Button type="button" color="danger" onClick={reset}>
         Reset
       </Button>
-    </form>
+    </Form>
   );
 };
