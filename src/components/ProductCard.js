@@ -18,26 +18,28 @@ const ProductCard = ({ product, dataCek }) => {
   });
 
   return (
-      <div className={`product-card ${styles.card}`} title={product.id}>
-        <img src={img} />
-        <h3>{name}</h3>
-        <p>{description}</p>
-        <p>{price}</p>
-        <Button
-          color="primary"
-          onClick={() => dataCek(name + " ürünü satın alındı!")}
-        >
-          Satın Al
-        </Button>
-        <Link
-          className="btn btn-primary ms-1"
-          to={"/product-detail/" + product.id}
-        >
-          İncele
-        </Link>
-      </div>
+    <div className={`product-card ${styles.card}`} title={product.id}>
+      <img src={img} />
+      <h3>{name}</h3>
+      <p>{description}</p>
+      <p>{price}</p>
+      <Button
+        color="primary"
+        onClick={() => dataCek(name + " ürünü satın alındı!")}
+      >
+        Satın Al
+      </Button>
+      <Link
+        className="btn btn-primary ms-1"
+        to={"/product-detail/" + product.id}
+      >
+        İncele
+      </Link>
+      <Link className="btn btn-warning ms-1" to={"/product-form/" + product.id}>
+        Düzenle
+      </Link>
+    </div>
   );
 };
 
 export default ProductCard;
-

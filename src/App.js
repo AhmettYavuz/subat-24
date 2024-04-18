@@ -13,6 +13,7 @@ import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ContactPage } from "./pages/ContactPage";
 
 import "./App.css";
+import { ProductUpdatePage } from "./pages/ProductUpdatePage";
 
 function App() {
   const [productsData, setProductsData] = useState([]);
@@ -77,20 +78,23 @@ function App() {
       {showSlide && <Slide />}
       <div className="page-body">
         <Switch>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
           <Route path="/products" exact>
             <ProductPage productsData={productsData} />
           </Route>
           <Route path="/product-detail/:productId" exact>
             <ProductDetailPage productsData={productsData} />
           </Route>
+          <Route path="/product-form/:productId" exact>
+            <ProductUpdatePage productsData={productsData} />
+          </Route>
           <Route path="/counter" exact>
             <CounterPage />
           </Route>
           <Route path="/contact" exact>
             <ContactPage />
+          </Route>
+          <Route path="/" exact>
+            <HomePage />
           </Route>
         </Switch>
       </div>

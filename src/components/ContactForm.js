@@ -45,6 +45,7 @@ export const ContactForm = () => {
   const [isValid, setValid] = useState(false);
 
   const validationCheck = () => {
+    // name validation
     if (!formData.name) {
       setErrors((oldErrors) => ({
         ...oldErrors,
@@ -56,6 +57,7 @@ export const ContactForm = () => {
         name: "",
       }));
     }
+    // subscribe validation
     if (formData.subscribe.length === 0) {
       setErrors((oldErrors) => ({
         ...oldErrors,
@@ -67,6 +69,7 @@ export const ContactForm = () => {
         subscribe: "",
       }));
     }
+    // message validation
     if (formData.message.length < 10 || formData.message.length > 300) {
       setErrors((oldErrors) => ({
         ...oldErrors,
@@ -230,7 +233,7 @@ export const ContactForm = () => {
           </div>
         ))}
       </div>
-      <Button type="submit" color="primary">
+      <Button type="submit" color="primary" disabled={!isValid}>
         Gönder
       </Button>
       <Button type="button" color="danger" onClick={reset}>

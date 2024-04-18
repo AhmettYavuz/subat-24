@@ -10,7 +10,10 @@ footer {
 }
 
 nav > a {
+  display: inline-block;
+  border-radius: 0.5rem;
   margin-right: 1rem;
+  padding: 0.5rem 1rem;
   color: #e2e2e2;
   font-weight: bold;
   text-decoration: none;
@@ -19,6 +22,11 @@ nav > a {
 
 nav > a:hover {
   color: #fff;
+}
+
+nav > a.active {
+  background-color: #e2e2e2;
+  color: rgb(0, 106, 255);
 }
 
 .products-container {

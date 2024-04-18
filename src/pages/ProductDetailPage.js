@@ -25,8 +25,7 @@ export const ProductDetailPage = ({ productsData }) => {
     <div>
       <h1>
         <Button color="link" onClick={geriGit}>
-          {" "}
-          {"<"}{" "}
+          {"<"}
         </Button>
         Product Detail of {product.name}
       </h1>

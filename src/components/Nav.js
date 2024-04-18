@@ -1,12 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const Nav = ({ productsCount }) => {
   return (
     <nav>
-      <Link to="/">Home</Link>
-      <Link to="/products" data-cy="product-link">Products [{productsCount}]</Link>
-      <Link to="/counter">Counter</Link>
-      <Link to="/contact">Contact</Link>
+      {/* Semantic HTML > nav */}
+      <NavLink to="/" exact={true}>
+        Home
+      </NavLink>
+      <NavLink to="/products" data-cy="product-link">
+        Products [{productsCount}]
+      </NavLink>
+      <NavLink to="/counter">Counter</NavLink>
+      <NavLink to="/contact">Contact</NavLink>
     </nav>
   );
 };
