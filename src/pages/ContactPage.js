@@ -1,11 +1,11 @@
-import { ContactForm } from "../components/ContactForm";
+import { ContactHookForm } from "../components/ContactHookForm";
 
 export const ContactPage = () => {
   return (
     <div>
       <h1>Contact Page</h1>
       <hr />
-      <ContactForm />
+      <ContactHookForm />
     </div>
   );
 };

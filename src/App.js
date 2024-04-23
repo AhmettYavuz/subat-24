@@ -14,6 +14,7 @@ import { ContactPage } from "./pages/ContactPage";
 
 import "./App.css";
 import { ProductUpdatePage } from "./pages/ProductUpdatePage";
+import { toast } from "react-toastify";
 
 function App() {
   const [productsData, setProductsData] = useState([]);
@@ -53,6 +54,7 @@ function App() {
     // component did mount
     // tüm uygulama yüklendi
     fetchProducts();
+    toast.error("Sayfama hoşgeldiniz");
 
     return () => {
       // component will unmount
