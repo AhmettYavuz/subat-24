@@ -44,5 +44,9 @@ nav > a.active {
 }
 
 .my-btn {
-  @apply px-5 py-2 shadow-lg text-gray-100 rounded m-1 transition border;
+  @apply px-5 py-2 shadow-lg text-gray-100 rounded m-1 transition border bg-sky-600;
+}
+
+button {
+  @apply my-btn;
 }

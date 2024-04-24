@@ -12,8 +12,26 @@ const counterStyle = {
   maxWidth: 600,
 };
 
-const Counter = () => {
-  const [sayac, setSayac] = useState(0);
+/*
+sayac = {
+  sayac1: "12",
+  sayac2: 5,
+  sayac3: 8
+}
+
+*/
+
+const Counter = ({ id }) => {
+  const [sayac, setSayac] = useState(() => {
+    const sayacLocal = localStorage.getItem("sayac");
+    if (sayacLocal) {
+      const sayacData = JSON.parse(sayacLocal);
+
+      return Number(sayacData["sayac" + id]);
+    } else {
+      return 0;
+    }
+  });
   const [show, setShow] = useState(true);
 
   const sayacArttir = () => {
@@ -36,6 +54,18 @@ const Counter = () => {
     // component did update
     console.log("COUNTER DID UPDATE!!!");
   });
+
+  useEffect(() => {
+    const sayacLocal = localStorage.getItem("sayac");
+    if (sayacLocal) {
+      const sayacData = JSON.parse(sayacLocal);
+
+      sayacData["sayac" + id] = sayac;
+      localStorage.setItem("sayac", JSON.stringify(sayacData));
+    } else {
+      localStorage.setItem("sayac", JSON.stringify({ ["sayac" + id]: sayac }));
+    }
+  }, [sayac]);
 
   return (
     <>

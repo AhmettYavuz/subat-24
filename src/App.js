@@ -12,9 +12,10 @@ import { CounterPage } from "./pages/CounterPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ContactPage } from "./pages/ContactPage";
 
-import "./App.css";
 import { ProductUpdatePage } from "./pages/ProductUpdatePage";
 import { toast } from "react-toastify";
+
+import "./App.css";
 
 function App() {
   const [productsData, setProductsData] = useState([]);
