@@ -27,7 +27,7 @@ const Counter = ({ id }) => {
     if (sayacLocal) {
       const sayacData = JSON.parse(sayacLocal);
 
-      return Number(sayacData["sayac" + id]);
+      return Number(sayacData["sayac" + id]) || 0;
     } else {
       return 0;
     }
@@ -73,10 +73,19 @@ const Counter = ({ id }) => {
         {show ? "Sakla" : "Göster"}
       </button>
       <div className={`counter ${show ? "show" : "hide"}`}>
-        <p>SAYAÇ: {sayac}</p>
-        <button onClick={sayacArttir}>+ Arttır</button>
-        <button onClick={() => setSayac(0)}>0 RESET</button>
-        <button onClick={sayacAzalt}>- Azalt</button>
+        <p>
+          SAYAÇ:
+          <span data-testid="sayac-deger">{sayac}</span>
+        </p>
+        <button data-testid="arttir-btn" onClick={sayacArttir}>
+          + Arttır
+        </button>
+        <button data-testid="reset-btn" onClick={() => setSayac(0)}>
+          0 RESET
+        </button>
+        <button data-testid="azalt-btn" onClick={sayacAzalt}>
+          - Azalt
+        </button>
       </div>
     </>
   );

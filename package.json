@@ -45,5 +45,10 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.3"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
   }
 }
