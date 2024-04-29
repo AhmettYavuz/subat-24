@@ -11,6 +11,7 @@ import { HomePage } from "./pages/HomePage";
 import { CounterPage } from "./pages/CounterPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ContactPage } from "./pages/ContactPage";
+import { Sayac } from "./components/Sayac";
 
 import { ProductUpdatePage } from "./pages/ProductUpdatePage";
 import { toast } from "react-toastify";
@@ -72,6 +73,7 @@ function App() {
   }, [location]);
 
   return (
+    //  NO HTML =>>>> JSX
     <div className="app">
       <Header
         productsCount={productsData.length}
@@ -102,6 +104,7 @@ function App() {
         </Switch>
       </div>
       <Footer productsCount={productsData.length} />
+      <Sayac />
     </div>
   );
 }

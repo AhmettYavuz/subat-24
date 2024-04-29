@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import Counter from "../components/Counter";
-import { CounterWithHook } from "../components/CounterWithHook";
+import CounterWithReducer from "../components/CounterWithReducer";
 
 export const CounterPage = () => {
   useEffect(() => {
@@ -12,14 +11,16 @@ export const CounterPage = () => {
     };
   }, []);
 
+  let userName = "Ali";
+
   return (
     <div className="bg-kitten bg-contain bg-no-repeat bg-right">
-      <h1>Counter Page</h1>
+      <h1>Sayaç Sayfası | {userName}</h1>
       <hr />
       {/* <Counter id="1" />
       <Counter id="2" />
       <Counter id="3" /> */}
-      <CounterWithHook />
+      <CounterWithReducer />
     </div>
   );
 };

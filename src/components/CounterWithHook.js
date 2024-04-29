@@ -7,18 +7,18 @@ export const CounterWithHook = () => {
   return (
     <div>
       <div>
-        Sayaç: {sayac}
+        Sayaç 1: {sayac}
         <button className="my-btn" onClick={ekle}>
-          Arttıs
+          Arttır
         </button>
         <button className="my-btn" onClick={cikar}>
           Azalt
         </button>
       </div>
       <div>
-        Sayaç: {sayac1}
+        Sayaç 2: {sayac1}
         <button className="my-btn" onClick={ekle1}>
-          Arttıs
+          Arttır
         </button>
         <button className="my-btn" onClick={cikar1}>
           Azalt
@@ -27,3 +27,5 @@ export const CounterWithHook = () => {
     </div>
   );
 };
+
+//  React Componenti çalıştırdı ekrana ekledi : Render
