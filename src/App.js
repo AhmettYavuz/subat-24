@@ -17,38 +17,34 @@ import { ProductUpdatePage } from "./pages/ProductUpdatePage";
 import { toast } from "react-toastify";
 
 import "./App.css";
+import { useDispatch } from "react-redux";
+import { ProductActions } from "./store/reducers/productReducer";
+import { setProductsActionCreator } from "./store/acitons/productActions";
 
 function App() {
-  const [productsData, setProductsData] = useState([]);
   const [showSlide, setShowSlide] = useState(true);
   const location = useLocation();
+  const dispatch = useDispatch();
 
   const productEkle = () => {
-    setProductsData([
-      ...productsData,
-      {
-        id: "yeni-eklenen-product-" + Math.round(Math.random() * 999999),
-        img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1200%2F1*odW0CyTVxMVt5s3yhjjOhw.png&f=1&nofb=1&ipt=6d4453ed13c1d4eb06551eab3c1efbdf67c5acaac3bec8f8720b51c990b75e0b&ipo=images",
-        name: "React JS",
-        description:
-          "React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.",
-        price: 250,
-      },
-    ]);
-  };
-
-  const ilkUrunIsminiDegistir = () => {
-    const newProducts = [...productsData];
-    newProducts[0].name = "Yeni İsim";
-    setProductsData(productsData);
+    // setProductsData([
+    //   ...productsData,
+    //   {
+    //     id: "yeni-eklenen-product-" + Math.round(Math.random() * 999999),
+    //     img: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fmiro.medium.com%2Fv2%2Fresize%3Afit%3A1200%2F1*odW0CyTVxMVt5s3yhjjOhw.png&f=1&nofb=1&ipt=6d4453ed13c1d4eb06551eab3c1efbdf67c5acaac3bec8f8720b51c990b75e0b&ipo=images",
+    //     name: "React JS",
+    //     description:
+    //       "React lets you build user interfaces out of individual pieces called components. Create your own React components like Thumbnail, LikeButton, and Video. Then combine them into entire screens, pages, and apps.",
+    //     price: 250,
+    //   },
+    // ]);
   };
 
   const fetchProducts = () => {
     axios
       .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
       .then((res) => {
-        console.log(res.data); // Object Array === [ {}, {}, {} ... ]
-        setProductsData(res.data);
+        dispatch(setProductsActionCreator(res.data));
       });
   };
 
@@ -64,7 +60,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("location: ", location);
     if (location.pathname === "/products") {
       setShowSlide(false);
     } else {
@@ -75,22 +70,18 @@ function App() {
   return (
     //  NO HTML =>>>> JSX
     <div className="app">
-      <Header
-        productsCount={productsData.length}
-        productEkle={productEkle}
-        fetchProducts={fetchProducts}
-      />
-      {showSlide && <Slide />}
+      <Header productEkle={productEkle} fetchProducts={fetchProducts} />
+      {showSlide && false && <Slide />}
       <div className="page-body">
         <Switch>
           <Route path="/products" exact>
-            <ProductPage productsData={productsData} />
+            <ProductPage />
           </Route>
           <Route path="/product-detail/:productId" exact>
-            <ProductDetailPage productsData={productsData} />
+            <ProductDetailPage />
           </Route>
           <Route path="/product-form/:productId" exact>
-            <ProductUpdatePage productsData={productsData} />
+            <ProductUpdatePage />
           </Route>
           <Route path="/counter" exact>
             <CounterPage />
@@ -103,8 +94,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-      <Footer productsCount={productsData.length} />
-      <Sayac />
+      <Footer />
     </div>
   );
 }

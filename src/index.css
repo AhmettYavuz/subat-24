@@ -24,3 +24,7 @@ code {
 .renk-secimi > label {
   text-transform: capitalize;
 }
+
+input {
+  @apply py-1 px-2 border text-gray-900 rounded;
+}

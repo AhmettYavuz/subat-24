@@ -50,3 +50,7 @@ nav > a.active {
 button {
   @apply my-btn;
 }
+
+input {
+  @apply p-3 border text-gray-900;
+}

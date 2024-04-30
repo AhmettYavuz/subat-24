@@ -1,10 +1,13 @@
 import { useState } from "react";
 import Counter from "../components/Counter";
 import ProductCard from "../components/ProductCard";
+import { useSelector } from "react-redux";
 
 // state veya prop değişirse React Component render edilir - yenilenir
 
-const ProductPage = ({ productsData }) => {
+const ProductPage = () => {
+  const productsData = useSelector((store) => store.products);
+
   const [filterText, setFilterText] = useState("");
   // let filterText = "";
 

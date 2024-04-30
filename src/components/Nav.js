@@ -1,6 +1,9 @@
+import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
-const Nav = ({ productsCount }) => {
+const Nav = () => {
+  const productsCount = useSelector((store) => store.products.length);
+
   return (
     <nav>
       {/* Semantic HTML > nav */}
