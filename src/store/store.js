@@ -1,6 +1,8 @@
-import { combineReducers, legacy_createStore } from "redux";
+import { applyMiddleware, combineReducers, legacy_createStore } from "redux";
 import { globalReducer } from "./reducers/globalReducer";
 import { productReducer } from "./reducers/productReducer";
+import logger from "redux-logger";
+import { thunk } from "redux-thunk";
 
 const reducers = combineReducers({
   global: globalReducer,
@@ -8,4 +10,4 @@ const reducers = combineReducers({
 });
 
 // App Global State === store
-export const store = legacy_createStore(reducers);
+export const store = legacy_createStore(reducers, applyMiddleware(logger, thunk));

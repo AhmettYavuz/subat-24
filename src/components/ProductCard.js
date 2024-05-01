@@ -4,17 +4,17 @@ import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 const ProductCard = ({ product, dataCek }) => {
-  console.log("PRODUCT CARD PROPS: ", { product, dataCek });
+  // console.log("PRODUCT CARD PROPS: ", { product, dataCek });
   const { img, name, description, price } = product;
 
   // componentDidMount
   useEffect(() => {
-    console.log("ComponentDidMount: ProductCard");
+    // console.log("ComponentDidMount: ProductCard");
   }, []);
 
   // componentDidUpdate
   useEffect(() => {
-    console.log("ComponentDidUpdate: ProductCard");
+    // console.log("ComponentDidUpdate: ProductCard");
   });
 
   return (

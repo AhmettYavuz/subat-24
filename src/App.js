@@ -19,7 +19,7 @@ import { toast } from "react-toastify";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { ProductActions } from "./store/reducers/productReducer";
-import { setProductsActionCreator } from "./store/acitons/productActions";
+import { getProductsAction, setProductsActionCreator } from "./store/acitons/productActions";
 
 function App() {
   const [showSlide, setShowSlide] = useState(true);
@@ -40,18 +40,19 @@ function App() {
     // ]);
   };
 
-  const fetchProducts = () => {
-    axios
-      .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
-      .then((res) => {
-        dispatch(setProductsActionCreator(res.data));
-      });
-  };
+  // const fetchProducts = () => {
+  //   axios
+  //     .get("https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products")
+  //     .then((res) => {
+  //       dispatch(setProductsActionCreator(res.data));
+  //     });
+  // };
 
   useEffect(() => {
     // component did mount
     // tüm uygulama yüklendi
-    fetchProducts();
+    // fetchProducts();
+    dispatch(getProductsAction());
     toast.error("Sayfama hoşgeldiniz");
 
     return () => {
@@ -70,7 +71,7 @@ function App() {
   return (
     //  NO HTML =>>>> JSX
     <div className="app">
-      <Header productEkle={productEkle} fetchProducts={fetchProducts} />
+      <Header productEkle={productEkle} />
       {showSlide && false && <Slide />}
       <div className="page-body">
         <Switch>
