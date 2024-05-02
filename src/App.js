@@ -19,7 +19,14 @@ import { toast } from "react-toastify";
 import "./App.css";
 import { useDispatch } from "react-redux";
 import { ProductActions } from "./store/reducers/productReducer";
-import { getProductsAction, setProductsActionCreator } from "./store/acitons/productActions";
+import {
+  getProductsAction,
+  setProductsActionCreator,
+} from "./store/acitons/productActions";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CommercePage } from "./pages/CommercePage";
+
+const queryClient = new QueryClient();
 
 function App() {
   const [showSlide, setShowSlide] = useState(true);
@@ -70,33 +77,38 @@ function App() {
 
   return (
     //  NO HTML =>>>> JSX
-    <div className="app">
-      <Header productEkle={productEkle} />
-      {showSlide && false && <Slide />}
-      <div className="page-body">
-        <Switch>
-          <Route path="/products" exact>
-            <ProductPage />
-          </Route>
-          <Route path="/product-detail/:productId" exact>
-            <ProductDetailPage />
-          </Route>
-          <Route path="/product-form/:productId" exact>
-            <ProductUpdatePage />
-          </Route>
-          <Route path="/counter" exact>
-            <CounterPage />
-          </Route>
-          <Route path="/contact" exact>
-            <ContactPage />
-          </Route>
-          <Route path="/" exact>
-            <HomePage />
-          </Route>
-        </Switch>
+    <QueryClientProvider client={queryClient}>
+      <div className="app">
+        <Header productEkle={productEkle} />
+        {showSlide && false && <Slide />}
+        <div className="page-body">
+          <Switch>
+            <Route path="/products" exact>
+              <ProductPage />
+            </Route>
+            <Route path="/product-detail/:productId" exact>
+              <ProductDetailPage />
+            </Route>
+            <Route path="/product-form/:productId" exact>
+              <ProductUpdatePage />
+            </Route>
+            <Route path="/counter" exact>
+              <CounterPage />
+            </Route>
+            <Route path="/contact" exact>
+              <ContactPage />
+            </Route>
+            <Route path="/commerce" exact>
+              <CommercePage />
+            </Route>
+            <Route path="/" exact>
+              <HomePage />
+            </Route>
+          </Switch>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </QueryClientProvider>
   );
 }
 
