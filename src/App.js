@@ -25,6 +25,10 @@ import {
 } from "./store/acitons/productActions";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CommercePage } from "./pages/CommercePage";
+import {
+  GlobalContext,
+  GlobalContextProvider,
+} from "./context/globalContextProvider";
 
 const queryClient = new QueryClient();
 
@@ -78,36 +82,38 @@ function App() {
   return (
     //  NO HTML =>>>> JSX
     <QueryClientProvider client={queryClient}>
-      <div className="app">
-        <Header productEkle={productEkle} />
-        {showSlide && false && <Slide />}
-        <div className="page-body">
-          <Switch>
-            <Route path="/products" exact>
-              <ProductPage />
-            </Route>
-            <Route path="/product-detail/:productId" exact>
-              <ProductDetailPage />
-            </Route>
-            <Route path="/product-form/:productId" exact>
-              <ProductUpdatePage />
-            </Route>
-            <Route path="/counter" exact>
-              <CounterPage />
-            </Route>
-            <Route path="/contact" exact>
-              <ContactPage />
-            </Route>
-            <Route path="/commerce" exact>
-              <CommercePage />
-            </Route>
-            <Route path="/" exact>
-              <HomePage />
-            </Route>
-          </Switch>
+      <GlobalContextProvider>
+        <div className="app">
+          <Header productEkle={productEkle} />
+          {showSlide && false && <Slide />}
+          <div className="page-body">
+            <Switch>
+              <Route path="/products" exact>
+                <ProductPage />
+              </Route>
+              <Route path="/product-detail/:productId" exact>
+                <ProductDetailPage />
+              </Route>
+              <Route path="/product-form/:productId" exact>
+                <ProductUpdatePage />
+              </Route>
+              <Route path="/counter" exact>
+                <CounterPage />
+              </Route>
+              <Route path="/contact" exact>
+                <ContactPage />
+              </Route>
+              <Route path="/commerce" exact>
+                <CommercePage />
+              </Route>
+              <Route path="/" exact>
+                <HomePage />
+              </Route>
+            </Switch>
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </GlobalContextProvider>
     </QueryClientProvider>
   );
 }
