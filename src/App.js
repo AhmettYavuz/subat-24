@@ -11,24 +11,20 @@ import { HomePage } from "./pages/HomePage";
 import { CounterPage } from "./pages/CounterPage";
 import { ProductDetailPage } from "./pages/ProductDetailPage";
 import { ContactPage } from "./pages/ContactPage";
-import { Sayac } from "./components/Sayac";
 
 import { ProductUpdatePage } from "./pages/ProductUpdatePage";
 import { toast } from "react-toastify";
 
-import "./App.css";
-import { useDispatch } from "react-redux";
-import { ProductActions } from "./store/reducers/productReducer";
-import {
-  getProductsAction,
-  setProductsActionCreator,
-} from "./store/acitons/productActions";
+import { useDispatch, useSelector } from "react-redux";
+import { getProductsAction } from "./store/acitons/productActions";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { CommercePage } from "./pages/CommercePage";
-import {
-  GlobalContext,
-  GlobalContextProvider,
-} from "./context/globalContextProvider";
+import { GlobalContextProvider } from "./context/globalContextProvider";
+import { LoginPage } from "./pages/LoginPage";
+import { useHistory } from "react-router-dom";
+
+import "./App.css";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +32,9 @@ function App() {
   const [showSlide, setShowSlide] = useState(true);
   const location = useLocation();
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const user = useSelector((s) => s.global.user);
 
   const productEkle = () => {
     // setProductsData([
@@ -59,12 +58,35 @@ function App() {
   //     });
   // };
 
+  const checkUserAutoLogin = () => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      axios
+        .get("https://workintech-fe-ecommerce.onrender.com/verify", {
+          headers: {
+            Authorization: token,
+          },
+        })
+        .then((res) => {
+          console.log("checkUserAutoLogin res: ", res.data);
+          localStorage.setItem("token", res.data.token);
+          dispatch({
+            type: "SET_USER",
+            payload: res.data,
+          });
+        });
+    }
+  };
+
   useEffect(() => {
     // component did mount
     // tüm uygulama yüklendi
     // fetchProducts();
     dispatch(getProductsAction());
     toast.error("Sayfama hoşgeldiniz");
+
+    checkUserAutoLogin();
 
     return () => {
       // component will unmount
@@ -88,9 +110,24 @@ function App() {
           {showSlide && false && <Slide />}
           <div className="page-body">
             <Switch>
-              <Route path="/products" exact>
-                <ProductPage />
-              </Route>
+              <Route
+                path="/products"
+                exact
+                render={() => {
+                  if (user.email) {
+                    return <ProductPage />;
+                  } else {
+                    return (
+                      <Redirect
+                        to={{
+                          pathname: "/login",
+                          state: { referrer: "/products" },
+                        }}
+                      />
+                    );
+                  }
+                }}
+              ></Route>
               <Route path="/product-detail/:productId" exact>
                 <ProductDetailPage />
               </Route>
@@ -105,6 +142,9 @@ function App() {
               </Route>
               <Route path="/commerce" exact>
                 <CommercePage />
+              </Route>
+              <Route path="/login" exact>
+                <LoginPage />
               </Route>
               <Route path="/" exact>
                 <HomePage />

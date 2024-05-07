@@ -52,5 +52,5 @@ button {
 }
 
 input {
-  @apply p-3 border text-gray-900;
+  @apply p-3 border text-gray-900 rounded;
 }

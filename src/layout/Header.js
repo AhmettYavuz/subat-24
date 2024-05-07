@@ -8,6 +8,7 @@ import { GlobalContext } from "../context/globalContextProvider";
 
 const Header = ({ productEkle, fetchProducts }) => {
   const { title, description } = useSelector((store) => store.global);
+  const user = useSelector((s) => s.global.user);
 
   const { lang, theme } = useContext(GlobalContext);
   // component Did Mount!
@@ -21,28 +22,30 @@ const Header = ({ productEkle, fetchProducts }) => {
   });
 
   return (
-    <header className="app-header">
-      <Title>{title}</Title>
-      <p>{description}</p>
-      <Nav />
-      <MyButton onClick={productEkle}>+ Product Ekle</MyButton>
-      <button onClick={fetchProducts} className="btn btn-primary w-[320px]">
-        Ürünleri yükle
-      </button>
-      <MyLink href="http://duckduckgo.com">Test My Link</MyLink>
+    <header className="app-header flex justify-between">
       <div>
+        <Title>{title}</Title>
+        <p>{description}</p>
+      </div>
+      <div>
+        <Nav />
+        <MyButton onClick={productEkle}>+ Product Ekle</MyButton>
+        <button onClick={fetchProducts} className="btn btn-primary w-[320px]">
+          Ürünleri yükle
+        </button>
+        <MyLink href="http://duckduckgo.com">Test My Link</MyLink>
+      </div>
+
+      <div>
+        <div>{user.name || "Anonim"}</div>
         <GlobalContext.Consumer>
           {(globalContext) => (
             <div>
-              <span>Lang: {globalContext.lang}</span>
-              <span>Theme: {globalContext.theme}</span>
+              <span>{globalContext.lang}</span>
+              <span>{globalContext.theme}</span>
             </div>
           )}
         </GlobalContext.Consumer>
-      </div>
-      <div>
-        <span>Lang: {lang}</span>
-        <span>Theme: {theme}</span>
       </div>
     </header>
   );

@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 
 const Nav = () => {
   const productsCount = useSelector((store) => store.products.length);
+  const user = useSelector((s) => s.global.user);
 
   const { isPending, error, data } = useQuery({
     queryKey: ["products"],
@@ -26,6 +27,7 @@ const Nav = () => {
       <NavLink to="/counter">Counter</NavLink>
       <NavLink to="/contact">Contact</NavLink>
       <NavLink to="/commerce">Commerce [{data?.total}]</NavLink>
+      {!user.email && <NavLink to="/login">Login</NavLink>}
     </nav>
   );
 };

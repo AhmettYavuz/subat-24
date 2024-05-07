@@ -1,12 +1,17 @@
 const initialState = {
   user: {
-    name: "Anonim",
-    age: 99,
+    name: "",
+    age: 0,
   },
   title: "Hello Redux",
   description: "By by props",
 };
 
 export const globalReducer = (state = initialState, action) => {
-  return state;
+  switch (action.type) {
+    case "SET_USER":
+      return { ...state, user: action.payload };
+    default:
+      return state;
+  }
 };
