@@ -1,29 +1,28 @@
+
 import { useEffect, useState } from "react";
 import Counter from "../components/Counter";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getProductsAction } from "../store/acitons/productActions";
-import { useAxios } from "../hooks/useAxios";
 
 // state veya prop değişirse React Component render edilir - yenilenir
 
 const ProductPage = () => {
-  const [fetchProducts, productsData, err, loading] = useAxios({
-    reqType: "get",
-    initialValue: [],
-  });
+  const productsData = useSelector((store) => store.products);
+  const dispatch = useDispatch();
 
   const [filterText, setFilterText] = useState("");
+  // let filterText = "";
 
   const inputChangeHandler = (e) => {
     setFilterText(e.target.value);
+    // filterText = e.target.value;
   };
 
   useEffect(() => {
-    fetchProducts({
-      endpoint: "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
-    });
-  }, []);
+    dispatch(getProductsAction());
+  } , [])
+
 
   return (
     <>

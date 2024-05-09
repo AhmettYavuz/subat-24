@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
+import { API } from "../api/api";
 
 const limit = 20;
 const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -11,7 +12,7 @@ export const CommercePage = () => {
   const { isPending, error, data } = useQuery({
     queryKey: ["products", page, limit],
     queryFn: () =>
-      axios
+      API
         .get("https://workintech-fe-ecommerce.onrender.com/products", {
           params: { offset: limit * (page - 1), limit },
         })

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { API } from "../api/api";
 
 export const ProductUpdatePage = ({ productsData }) => {
   const [product, setProduct] = useState({});
@@ -25,7 +26,7 @@ export const ProductUpdatePage = ({ productsData }) => {
     // sayfa yenilenmesini engelle!
     e.preventDefault();
 
-    axios.post("endpoint-URL", product).then((res) => {
+    API.post("endpoint-URL", product).then((res) => {
       // başarıyla kaydedildi
       // todo: Tüm ürün datasını yeniden çek
       // todo: ürünler sayfasına yönlendir

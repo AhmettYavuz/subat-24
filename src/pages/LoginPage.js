@@ -6,6 +6,7 @@ import {
   useHistory,
   useLocation,
 } from "react-router-dom/cjs/react-router-dom.min";
+import { API, renewAPI } from "../api/api";
 
 export const LoginPage = () => {
   const dispatch = useDispatch();
@@ -22,17 +23,19 @@ export const LoginPage = () => {
   const loginSubmit = (e) => {
     e.preventDefault();
     console.log("login submit ", loginData);
-    axios
-      .post("https://workintech-fe-ecommerce.onrender.com/login", loginData)
-      .then((res) => {
-        console.log("login res: ", res.data);
-        localStorage.setItem("token", res.data.token);
-        dispatch({
-          type: "SET_USER",
-          payload: res.data,
-        });
-        history.push(location?.state?.referrer || "/");
+    API.post(
+      "https://workintech-fe-ecommerce.onrender.com/login",
+      loginData
+    ).then((res) => {
+      console.log("login res: ", res.data);
+      localStorage.setItem("token", res.data.token);
+      dispatch({
+        type: "SET_USER",
+        payload: res.data,
       });
+      renewAPI();
+      history.push(location?.state?.referrer || "/");
+    });
   };
 
   const changeHandler = (e) => {

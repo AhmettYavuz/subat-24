@@ -25,6 +25,7 @@ import { useHistory } from "react-router-dom";
 
 import "./App.css";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import { API } from "./api/api";
 
 const queryClient = new QueryClient();
 
@@ -62,7 +63,7 @@ function App() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      axios
+      API
         .get("https://workintech-fe-ecommerce.onrender.com/verify", {
           headers: {
             Authorization: token,

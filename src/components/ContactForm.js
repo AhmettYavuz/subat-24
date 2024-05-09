@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { API } from "../api/api";
 
 const formDataInitial = {
   name: "",
@@ -113,7 +114,7 @@ export const ContactForm = () => {
 
     // axios request formData
     if (isValid) {
-      axios
+      API
         .post("https://reqres.in/api/users", formData)
         .then((res) => {
           console.log(res);

@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
+import { API } from "../api/api";
 
 const subscribeList = ["Haberler", "Kampanyalar", "Güncellemeler"];
 
@@ -46,7 +47,7 @@ export const ContactHookForm = () => {
     console.log(">>>>>>>>>> form datası:", data);
     // axios request formData
     if (false) {
-      axios
+      API
         .post("https://reqres.in/api/users", data)
         .then((res) => {
           console.log(res);
