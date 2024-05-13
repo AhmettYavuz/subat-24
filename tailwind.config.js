@@ -6,6 +6,9 @@ module.exports = {
       backgroundImage: {
         kitten: "url('./assets/kitten.jpg')",
       },
+      colors: {
+        siyah: "#333",
+      },
     },
   },
   plugins: [],

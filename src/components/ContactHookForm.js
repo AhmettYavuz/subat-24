@@ -35,7 +35,7 @@ export const ContactHookForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       ...formDataInitial,
@@ -43,12 +43,11 @@ export const ContactHookForm = () => {
     mode: "all",
   });
 
-  const submitHandler = (data) => {
+  const doSubmit = (data) => {
     console.log(">>>>>>>>>> form datası:", data);
     // axios request formData
-    if (false) {
-      API
-        .post("https://reqres.in/api/users", data)
+    if (true) {
+      API.post("https://reqres.in/api/users", data)
         .then((res) => {
           console.log(res);
         })
@@ -59,10 +58,10 @@ export const ContactHookForm = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitHandler)}>
-      <h1>
+    <Form onSubmit={handleSubmit(doSubmit)}>
+      <h1 className="form-title">
         Hook Form Valid
-        {/* {!isValid && " Değil"} */}
+        {!isValid && " Değil"}
       </h1>
       <FormGroup>
         <Label for="isim-input">İsim</Label>
@@ -77,12 +76,7 @@ export const ContactHookForm = () => {
       </FormGroup>
       <FormGroup>
         <Label for="subscribe-input">Abone ol</Label>
-        {/* <input
-          id="subscribe-input"
-          type="checkbox"
-          {...register("subscribe")}
-          placeholder="Lütfen isimn giriniz..."
-        /> */}
+
         {subscribeList.map((field) => {
           console.log("map field: ", field);
           return (
@@ -148,15 +142,14 @@ export const ContactHookForm = () => {
                 message: "Mesajınız en az 10 karakter uzunluğunda olabilir...",
               },
               maxLength: {
-                value: 300,
+                value: 30,
                 message:
-                  "Mesajınız en fazla 300 karakter uzunluğunda olabilir...",
+                  "Mesajınız en fazla 30 karakter uzunluğunda olabilir...",
               },
             })}
           />
           {errors.message && <p className="error">{errors.message.message}</p>}
         </label>
-        {/* {errors.message && <p className="error">{errors.message}</p>} */}
       </div>
 
       <Button type="submit" color="primary">

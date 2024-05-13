@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 header,
 footer {
   background-color: #333;
@@ -44,7 +48,10 @@ nav > a.active {
 }
 
 .my-btn {
-  @apply px-5 py-2 shadow-lg text-gray-100 rounded m-1 transition border bg-sky-600;
+  @apply px-5 py-2 shadow-lg text-gray-100 rounded m-1 transition border bg-sky-600 hover:bg-sky-500;
+}
+
+.my-btn:hover {
 }
 
 button {
@@ -53,4 +60,12 @@ button {
 
 input {
   @apply p-3 border text-gray-900 rounded;
+}
+
+.b-shadow {
+  box-shadow: 0 0 13px 2px rgba(0, 0, 0, 0.2);
+}
+
+.b-radius {
+  border-radius: 0.5rem;
 }

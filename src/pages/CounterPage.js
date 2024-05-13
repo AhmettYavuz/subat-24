@@ -14,7 +14,7 @@ export const CounterPage = () => {
   let userName = "Ali";
 
   return (
-    <div className="bg-kitten bg-contain bg-no-repeat bg-right">
+    <div className="bg-kitten bg-contain bg-no-repeat bg-right b-shadow b-radius">
       <h1>Sayaç Sayfası | {userName}</h1>
       <hr />
       {/* <Counter id="1" />

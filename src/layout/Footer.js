@@ -6,7 +6,7 @@ const Footer = () => {
   const { title, description } = useSelector((store) => store.global);
 
   return (
-    <footer className="flex justify-between">
+    <footer className="flex justify-between bg-siyah text-white">
       <div>
         <Title>{title}</Title>
         <p>{description}</p>
