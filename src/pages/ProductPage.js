@@ -9,7 +9,6 @@ import { useAxios } from "../hooks/useAxios";
 
 const ProductPage = () => {
   const [fetchProducts, productsData, err, loading] = useAxios({
-    reqType: "get",
     initialValue: [],
   });
 
@@ -22,6 +21,7 @@ const ProductPage = () => {
   useEffect(() => {
     fetchProducts({
       endpoint: "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products",
+      reqType: "get",
     });
   }, []);
 

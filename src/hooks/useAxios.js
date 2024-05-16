@@ -1,12 +1,20 @@
 import { useState } from "react";
 import { API } from "../api/api";
 
-export const useAxios = ({ reqType, initialValue }) => {
+/*
+  axios.get(endpoint, config)
+  axios.delete(endpoint, config)
+
+  axios.post(endpoint, paylaod, config)
+  axios.put(endpoint, paylaod, config)
+*/
+
+export const useAxios = ({ initialValue }) => {
   const [data, setData] = useState(initialValue);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // boolean - flag - bayrak
 
-  const doRequest = ({ endpoint, payload, config }) => {
+  const doRequest = ({ endpoint, reqType, payload, config }) => {
     setLoading(true);
     return API[reqType](endpoint, payload ? payload : config, config)
       .then((res) => {

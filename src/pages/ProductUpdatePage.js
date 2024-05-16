@@ -3,9 +3,12 @@ import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button, Form, FormGroup, Input, Label } from "reactstrap";
 import { API } from "../api/api";
+import { useAxios } from "../hooks/useAxios";
 
 export const ProductUpdatePage = ({ productsData }) => {
   const [product, setProduct] = useState({});
+  const [getProduct, productRaw] = useAxios({ initialValue: {} });
+
   const { productId } = useParams();
   const history = useHistory();
 
@@ -36,20 +39,23 @@ export const ProductUpdatePage = ({ productsData }) => {
 
   const reset = () => {
     // reset product data
-    setProductDefaultValues();
-  };
-
-  const setProductDefaultValues = () => {
-    productsData.forEach((p) => {
-      if (p.id == productId) {
-        setProduct(p);
-      }
-    });
+    setProduct({ ...productRaw });
   };
 
   useEffect(() => {
-    setProductDefaultValues();
-  }, [productsData, productId]);
+    getProduct({
+      endpoint:
+        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/" + productId,
+      reqType: "get",
+    }).then((data) => {
+      console.log("GetProducts Sonuçlandı data: ", data);
+      setProduct(data);
+    });
+  }, [productId]);
+
+  // useEffect(() => {
+  //   setProduct({ ...productRaw });
+  // }, [productRaw]);
 
   return (
     <div>

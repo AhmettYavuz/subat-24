@@ -24,3 +24,34 @@ root.render(
     </BrowserRouter>
   </Provider>
 );
+
+let pi = 3.14;
+pi = 3;
+
+let carpan = pi;
+carpan = 5;
+
+// pi == 3
+
+const sayilar = [1, 2, 3, 4, 5];
+const ramaklar = [...sayilar];
+ramaklar.push(6); // 6
+// sayilar.length == 5
+
+// immutability ?
+
+// filter > immutable
+
+sayilar.filter((s) => s > 3);
+
+// splice NOT immutable
+
+sayilar.splice(0, 2, 8, 9);
+
+// immutable YES
+const getAverageOfNumbers = (arr) => {
+  // reduce immutable
+  const copyArr = [...arr];
+  const total = arr.reduce((toplam, item) => toplam + item, 0);
+  return total / arr.length;
+};

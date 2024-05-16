@@ -1,25 +1,24 @@
 import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "reactstrap";
+import { useAxios } from "../hooks/useAxios";
 
-export const ProductDetailPage = ({ productsData }) => {
-  const [product, setProduct] = useState({});
+export const ProductDetailPage = () => {
+  const [getProduct, product] = useAxios({ initialValue: {} });
   const { productId } = useParams();
   const history = useHistory();
-
-  console.log("Product id: ", productId);
 
   const geriGit = () => {
     history.goBack();
   };
 
   useEffect(() => {
-    productsData.forEach((p) => {
-      if (p.id == productId) {
-        setProduct(p);
-      }
+    getProduct({
+      endpoint:
+        "https://620d69fb20ac3a4eedc05e3a.mockapi.io/api/products/" + productId,
+      reqType: "get",
     });
-  }, [productsData, productId]);
+  }, [productId]);
 
   return (
     <div>
