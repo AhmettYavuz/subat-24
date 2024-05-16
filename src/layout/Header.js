@@ -3,7 +3,7 @@ import Nav from "../components/Nav";
 import { Title } from "../components/Title";
 import { MyButton } from "../components/MyButton";
 import { MyLink } from "../components/MyLink";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GlobalContext } from "../context/globalContextProvider";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -11,9 +11,13 @@ const Header = ({ productEkle, fetchProducts }) => {
   const { title, description } = useSelector((store) => store.global);
   const user = useSelector((s) => s.global.user);
   const { lang, theme } = useContext(GlobalContext);
+  const dispatch = useDispatch();
 
   const [localTheme, setLocalTheme] = useLocalStorage("local-theme", "light");
   const [localLang, setLocalLang] = useLocalStorage("local-lang", "tr");
+  const [testObject, setTestObject] = useLocalStorage("test", { a: 1 });
+
+  console.log("testObject: ", testObject);
 
   const toggleTheme = () => {
     setLocalTheme(localTheme === "light" ? "dark" : "light");
@@ -21,6 +25,14 @@ const Header = ({ productEkle, fetchProducts }) => {
 
   const toggleLang = () => {
     setLocalLang(localLang === "tr" ? "en" : "tr");
+  };
+
+  const logout = () => {
+    localStorage.removeItem("token");
+    dispatch({
+      type: "SET_USER",
+      payload: {},
+    });
   };
 
   // component Did Mount!
@@ -56,6 +68,11 @@ const Header = ({ productEkle, fetchProducts }) => {
 
       <div>
         <div>{user.name || "Anonim"}</div>
+        {user.email && (
+          <div>
+            <button onClick={logout}>logout</button>
+          </div>
+        )}
         <GlobalContext.Consumer>
           {(globalContext) => (
             <div>

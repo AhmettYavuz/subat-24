@@ -1,6 +1,7 @@
 const initialState = {
   user: {
     name: "",
+    email: "",
     age: 0,
   },
   title: "Hello Redux",

@@ -10,6 +10,28 @@ import { store } from "./store/store";
 import "react-toastify/dist/ReactToastify.css";
 import "./index.css";
 
+// Object.prototype.toString = function () {
+//   console.log("TO STRING ", this, " İÇİN ÇALIŞTI");
+//   return JSON.stringify(this);
+// };
+
+// Array.prototype.toString = function () {
+//   console.log("ARRAY TO STRING ", this, " İÇİN ÇALIŞTI");
+//   return JSON.stringify(this);
+// };
+
+
+const u = {
+  name: "ali",
+  age: 19,
+  email: "ali@veli.com",
+};
+
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+
+console.log("u.toString() >>>>> ", u.toString());
+console.log("numbers.toString() >>>>> ", numbers.toString());
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>

@@ -35,7 +35,7 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const user = useSelector((s) => s.global.user);
+  const user = useSelector((store) => store.global.user);
 
   const productEkle = () => {
     // setProductsData([
@@ -63,20 +63,18 @@ function App() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      API
-        .get("https://workintech-fe-ecommerce.onrender.com/verify", {
-          headers: {
-            Authorization: token,
-          },
-        })
-        .then((res) => {
-          console.log("checkUserAutoLogin res: ", res.data);
-          localStorage.setItem("token", res.data.token);
-          dispatch({
-            type: "SET_USER",
-            payload: res.data,
-          });
+      API.get("https://workintech-fe-ecommerce.onrender.com/verify", {
+        headers: {
+          Authorization: token,
+        },
+      }).then((res) => {
+        console.log("checkUserAutoLogin res: ", res.data);
+        localStorage.setItem("token", res.data.token);
+        dispatch({
+          type: "SET_USER",
+          payload: res.data,
         });
+      });
     }
   };
 
@@ -160,6 +158,3 @@ function App() {
 }
 
 export default App;
-
-export const PI = 3;
-export const userName = "Anonim";

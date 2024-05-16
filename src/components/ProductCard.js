@@ -19,7 +19,7 @@ const ProductCard = ({ product, dataCek }) => {
 
   return (
     <div className={`product-card ${styles.card}`} title={product.id}>
-      <img src={img} />
+      <img src={img + "?random=" + Math.round(Math.random() * 999999999)} />
       <h3>{name}</h3>
       <p>{description}</p>
       <p>{price}</p>
